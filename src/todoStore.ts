@@ -1,26 +1,5 @@
-import { destroy, types } from "mobx-state-tree";
-import { TodoVm } from "./models/Todo.vm";
-
-export const TodoPageVm = types
-	.model({
-		todos: types.optional(types.array(TodoVm), [])
-	})
-	.actions(self => ({
-		add(todo) {
-			self.todos.push(todo)
-		},
-		remove(todo) {
-			destroy(todo)
-		},
-		removeAll() {
-			destroy(self.todos)
-		}
-	}))
-	.views(self => ({
-		get allItemsRemoved() {
-			return self.todos.length === 0
-		}
-	}))
+import { types } from "mobx-state-tree";
+import { TodoPageVm } from "./models/Todo.vm";
 
 const RootTodoStore = types
 	.model({
@@ -44,7 +23,7 @@ export const createTodoStore = () => RootTodoStore.create({
 			},
 			{
 				id: '1',
-				text: 'Test'
+				text: 'Test 23'
 			}
 		]
 	}

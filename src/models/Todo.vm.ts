@@ -1,6 +1,5 @@
-import { getParent, Instance, types } from "mobx-state-tree";
+import { destroy, getParent, Instance, types } from "mobx-state-tree";
 import moment from "moment";
-import { TodoPageVm } from "../todoStore";
 
 export const TodoVm = types
 	.model({
@@ -36,3 +35,24 @@ export const TodoVm = types
 
 export interface ITodo extends Instance<typeof TodoVm> {
 }
+
+export const TodoPageVm = types
+	.model({
+		todos: types.optional(types.array(TodoVm), [])
+	})
+	.actions(self => ({
+		add(todo) {
+			self.todos.push(todo)
+		},
+		remove(todo) {
+			destroy(todo)
+		},
+		removeAll() {
+			destroy(self.todos)
+		}
+	}))
+	.views(self => ({
+		get allItemsRemoved() {
+			return self.todos.length === 0
+		}
+	}))
