@@ -10,7 +10,8 @@ export const TodoArray: React.FC = () => {
 	return useObserver(() => ((
 		<>
 			<div style={{display: "flex", justifyContent: "center"}}>
-				<Button variant={"contained"} color={"primary"} onClick={todoPage.removeAll}>Remove all items</Button>
+				<Button disabled={todoPage.allItemsRemoved} variant={"contained"} color={"primary"}
+								onClick={todoPage.removeAll}>Remove all items</Button>
 			</div>
 			{todoPage.todos.map((item) =>
 				<div style={{marginBottom: '10px'}} key={item.id}>

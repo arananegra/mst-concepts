@@ -1,4 +1,4 @@
-import { destroy, Instance, types } from "mobx-state-tree";
+import { destroy, types } from "mobx-state-tree";
 import { TodoVm } from "./models/Todo.vm";
 
 export const TodoPageVm = types
@@ -16,9 +16,11 @@ export const TodoPageVm = types
 			destroy(self.todos)
 		}
 	}))
-
-export interface ITodoPage extends Instance<typeof TodoPageVm> {
-}
+	.views(self => ({
+		get allItemsRemoved() {
+			return self.todos.length === 0
+		}
+	}))
 
 const RootTodoStore = types
 	.model({

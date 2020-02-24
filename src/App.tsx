@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { TodoStoreProvider } from "./StoreProvider";
+import { TodoStoreProvider } from "./stores/StoreProvider";
 import { TodoArray } from "./components/todo-array";
 
 
