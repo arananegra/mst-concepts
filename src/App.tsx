@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { TodoStoreProvider } from "./StoreProvider";
+import { TodoArray } from "./components/todo-array";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<>
+			<h1 style={{width: '100%', textAlign: "center"}}>Todos for doing</h1>
+			<div style={{
+				display: "flex",
+				flexDirection: 'column',
+				alignItems: 'flex-start',
+				marginLeft: '10%',
+				textAlign: "center"
+			}}>
+				<TodoStoreProvider>
+					<TodoArray/>
+				</TodoStoreProvider>
+			</div>
+		</>
+	);
 }
 
 export default App;
