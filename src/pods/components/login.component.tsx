@@ -7,6 +7,7 @@ import { useStyles } from "../login/login.styles";
 import { useLoginStore } from '../hooks/use-stores';
 import { TextFieldMui } from "../../common/components/text-field-mui.component";
 import { useObserver } from "mobx-react-lite";
+import { CircularProgress } from "@material-ui/core";
 
 export const LoginComponent = () => {
 	const classes = useStyles();
@@ -35,14 +36,17 @@ export const LoginComponent = () => {
 							onChange={credentials.updateCredentials}
 							error={errors.password.message}
 						/>
-						<Button
-							onClick={credentials.login}
-							type="submit"
-							style={{outline: 'none'}}
-							variant="contained"
-							color="primary">
-							Login
-						</Button>
+						{credentials.isLoggingLoading ?
+							<div style={{display: "flex", justifyContent: "center"}}><CircularProgress/></div> :
+							<Button
+								onClick={credentials.login}
+								type="submit"
+								style={{outline: 'none'}}
+								variant="contained"
+								color="primary">
+								Login
+							</Button>
+						}
 					</div>
 				</CardContent>
 			</Card>

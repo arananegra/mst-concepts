@@ -1,9 +1,10 @@
-import { Instance, types, flow, getParent } from "mobx-state-tree";
+import { flow, getParent, Instance, types } from "mobx-state-tree";
 import { ValidationResultVm } from "../../common/models";
 import { loginFormValidation } from "./login.validation";
-import {ValidationResult} from '@lemoncode/fonk';
-import { TodoPageVm } from "../todo/todo.vm";
+import { FormValidationResult, ValidationResult } from '@lemoncode/fonk';
 import { RootLoginStore } from "./login.store";
+import { toast } from "react-toastify";
+import { validateCredentials } from "./login.api";
 
 export const CredentialsEntity = types
 	.model({
@@ -21,11 +22,29 @@ export const CredentialsEntity = types
 		changeLoadingStatus(isLoading: boolean) {
 			self.isLoggingLoading = isLoading;
 		},
-		login() {
+		login: flow(function* onLogin() {
+			self.isLoggingLoading = true;
+			const formValidationResult: FormValidationResult = yield loginFormValidation.validateForm({
+				username: self.username,
+				password: self.password
+			});
 
-		},
-		onBlurFields: flow(function* onBlurFields(fieldId: string, value: string)  {
-			const fieldValidationResult: ValidationResult =  yield loginFormValidation.validateField(fieldId, value);
+			if (formValidationResult.succeeded) {
+				const areValidCredentials = yield validateCredentials(self.username, self.password)
+				if (areValidCredentials) {
+					self.isLoggingLoading = false;
+					toast.success("WWUWUWUW");
+				} else {
+					self.isLoggingLoading = false;
+					toast.error("Wrong credentials");
+				}
+			} else {
+				self.isLoggingLoading = false;
+				toast.warn("Wrong fields present");
+			}
+		}),
+		onBlurFields: flow(function* onBlurFields(fieldId: string, value: string) {
+			const fieldValidationResult: ValidationResult = yield loginFormValidation.validateField(fieldId, value);
 			getParent<typeof RootLoginStore>(self, 1).errors.updateValidationErrors(fieldId, fieldValidationResult);
 		})
 	}))
@@ -46,3 +65,8 @@ export const CredentialsErrors = types
 
 export interface CredentialsErrorVm extends Instance<typeof CredentialsErrors> {
 }
+
+/*const getErrors = (self: IAnyStateTreeNode) =>
+	getEnv<{ credentialErrors: CredentialsErrorVm }>(self).credentialErrors;*/
+
+
