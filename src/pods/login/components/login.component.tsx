@@ -3,9 +3,9 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import * as React from "react";
-import { useStyles } from "../login/login.styles";
+import { useStyles } from "../login.styles";
 import { useLoginStore } from '../hooks/use-stores';
-import { TextFieldMui } from "../../common/components/text-field-mui.component";
+import { TextFieldMui } from "../../../common/components/text-field-mui.component";
 import { useObserver } from "mobx-react-lite";
 import { CircularProgress } from "@material-ui/core";
 
@@ -23,7 +23,7 @@ export const LoginComponent = () => {
 							label="Username"
 							name="username"
 							value={credentials.username}
-							onBlur={credentials.onBlurFields}
+							onBlur={credentials.onBlur}
 							onChange={credentials.updateCredentials}
 							error={errors.username.message}
 						/>
@@ -32,7 +32,7 @@ export const LoginComponent = () => {
 							name="password"
 							type="password"
 							value={credentials.password}
-							onBlur={credentials.onBlurFields}
+							onBlur={credentials.onBlur}
 							onChange={credentials.updateCredentials}
 							error={errors.password.message}
 						/>

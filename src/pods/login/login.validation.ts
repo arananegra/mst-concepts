@@ -2,8 +2,8 @@ import { Validators, createFormValidation, ValidationSchema } from '@lemoncode/f
 
 const loginFormValidationConstraints: ValidationSchema = {
   field: {
-    username: [Validators.required],
-    password: [Validators.required],
+    username: [{validator: Validators.required, message: 'Required field'}],
+    password: [{validator: Validators.required, message: 'Required field'}],
   },
 }
 

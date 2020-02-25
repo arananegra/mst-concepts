@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LoginComponent } from "../components/login.component";
+import { LoginComponent } from "./components/login.component";
 import { LoginStoreProvider } from "./login.provider";
 
 export const LoginPage = () => {

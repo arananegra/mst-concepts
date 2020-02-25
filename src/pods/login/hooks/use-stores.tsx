@@ -1,5 +1,5 @@
 import React from 'react'
-import { loginPageContext } from "../login/login.store";
+import { loginPageContext } from "../login.store";
 
 export const useLoginStore = () => {
 	const store = React.useContext(loginPageContext);
