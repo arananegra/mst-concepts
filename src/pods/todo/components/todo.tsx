@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ITodo } from '../models/Todo.vm'
+import { ITodo } from '../todo.vm'
 import Paper from "@material-ui/core/Paper";
 import { useObserver } from "mobx-react-lite"
 import Checkbox from "@material-ui/core/Checkbox";

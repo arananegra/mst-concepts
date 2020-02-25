@@ -1,5 +1,6 @@
 import { types } from "mobx-state-tree";
-import { TodoPageVm } from "./models/Todo.vm";
+import { TodoPageVm } from "./todo.vm";
+import * as React from "react";
 
 const RootTodoStore = types
 	.model({
@@ -30,3 +31,9 @@ export const createTodoStore = () => RootTodoStore.create({
 });
 
 export type ITodoStore = ReturnType<typeof createTodoStore>;
+
+
+export const todoPageContext = React.createContext<ITodoStore | null>({
+	...createTodoStore()
+});
+

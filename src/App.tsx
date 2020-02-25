@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import { TodoStoreProvider } from "./stores/StoreProvider";
-import { TodoArray } from "./components/todo-array";
+import { TodoArray } from "./pods/todo/components/todo-array";
+import { TodoStoreProvider } from "./pods/todo/todo.provider";
 
 
 function App() {
