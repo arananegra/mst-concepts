@@ -15,15 +15,15 @@ export const createTodoStore = () => RootTodoStore.create({
 				text: 'Test 1'
 			},
 			{
-				id: '1',
+				id: '2',
 				text: 'Test 2'
 			},
 			{
-				id: '1',
+				id: '3',
 				text: 'Test 3'
 			},
 			{
-				id: '1',
+				id: '4',
 				text: 'Test 23'
 			}
 		]

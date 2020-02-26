@@ -1,6 +1,6 @@
 import { onSnapshot, SnapshotOut, types } from "mobx-state-tree";
 import * as React from "react";
-import { CredentialsEntity, CredentialsErrors } from "./login.vm";
+import { CredentialsEntity, CredentialsEntityVm, CredentialsErrors } from "./login.vm";
 import { createDefaultValidationResult } from "@lemoncode/fonk";
 
 export const RootLoginStore = types
@@ -12,13 +12,16 @@ export const RootLoginStore = types
 export interface IRootLoginStore extends SnapshotOut<typeof RootLoginStore> {
 }
 
+let initialCredentialsState: CredentialsEntityVm = {
+	username: '',
+	password: '',
+	isLoggingLoading: false,
+	isUserLogged: false
+}
+
+
 let initialState: IRootLoginStore = {
-	credentials: {
-		username: '',
-		password: '',
-		isLoggingLoading: false,
-		isUserLogged: false
-	},
+	credentials: {...initialCredentialsState},
 	errors: {
 		username: {
 			...createDefaultValidationResult()
@@ -31,15 +34,21 @@ let initialState: IRootLoginStore = {
 }
 
 export const createLoginStore = () => {
-	if (localStorage.getItem("loginStore")) {
-		const json = JSON.parse(localStorage.getItem("loginStore"));
-		if (RootLoginStore.is(json)) initialState = json as IRootLoginStore
+	if (localStorage.getItem("credentialsStore")) {
+		const json = JSON.parse(localStorage.getItem("credentialsStore"));
+		if (CredentialsEntity.is(json)) {
+			initialState = {
+				...initialState,
+				credentials: {...json}
+			}
+		}
 	}
+
 
 	const loginVm = RootLoginStore.create(initialState);
 
-	onSnapshot(loginVm, snapshot => {
-		localStorage.setItem("loginStore", JSON.stringify(snapshot))
+	onSnapshot(loginVm.credentials, snapshot => {
+		localStorage.setItem("credentialsStore", JSON.stringify(snapshot))
 	});
 	return loginVm
 };
