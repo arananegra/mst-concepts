@@ -24,7 +24,7 @@ export const Todo: React.FC<Props> = (props) => {
 						item.changeCheckDoneStatus(checked)
 					} value="checkedA"/>
 				}
-				label="Mark as done"
+				label={item.itemDone}
 			/>
 			<Button style={{marginBottom: '10px'}} onClick={item.remove} variant={"contained"} color={"secondary"}>Remove todo</Button>
 		</Paper>

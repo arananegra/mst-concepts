@@ -31,6 +31,9 @@ export const TodoVm = types
 	.views(self => ({
 		get parsedDateOfCompletion() {
 			return self.dateOfCompletion ? 'Done: ' + moment(self.dateOfCompletion).format("MM/DD/YYYY") : "--"
+		},
+		get itemDone() {
+			return self.done ? 'Undo done': 'Mark as done'
 		}
 	}))
 

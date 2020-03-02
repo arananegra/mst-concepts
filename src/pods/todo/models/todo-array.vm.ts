@@ -16,7 +16,7 @@ export const TodoArrayVm = types
 		}),
 		add(todoText) {
 			const todoToAdd: ITodoSnap = {
-				id: String(self.todos.length) + todoText,
+				id: String('_' + Math.random().toString(36).substr(2, 9)),
 				dateOfCompletion: null,
 				done: false,
 				text: todoText
