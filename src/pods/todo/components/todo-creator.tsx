@@ -23,7 +23,7 @@ export const TodoCreator: React.FC<Props> = (props) => {
 									 value={todoTitle}
 									 style={{paddingBottom: '15px'}}/>
 
-				<Button disabled={todoTitle === ""} style={{marginBottom: '10px'}} onClick={() => {
+				<Button disabled={todoTitle === "" || todoArray.isLoadingTodos} style={{marginBottom: '10px'}} onClick={() => {
 					todoArray.add(todoTitle)
 					setTodoTitle("")
 				}} variant={"contained"}

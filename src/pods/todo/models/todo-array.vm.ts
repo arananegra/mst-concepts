@@ -5,14 +5,14 @@ import { ITodoSnap, TodoVm } from "./todo.vm";
 export const TodoArrayVm = types
 	.model({
 		todos: types.optional(types.array(TodoVm) ,[]),
-		loadingTodos: false
+		isLoadingTodos: false
 	})
 	.actions(self => ({
 		load: flow(function* load() {
-			self.loadingTodos = true;
+			self.isLoadingTodos = true;
 			const response = yield loadTodos();
 			applySnapshot(self.todos, response)
-			self.loadingTodos = false;
+			self.isLoadingTodos = false;
 		}),
 		add(todoText) {
 			const todoToAdd: ITodoSnap = {

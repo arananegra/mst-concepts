@@ -22,7 +22,7 @@ export const TodoArray: React.FC<Props> = (props) => {
 				<Button disabled={todoArray.allItemsRemoved} variant={"contained"} color={"primary"}
 								onClick={todoArray.removeAll}>Remove all items</Button>
 			</div>
-			{todoArray.loadingTodos ?
+			{todoArray.isLoadingTodos ?
 				<div>
 					<CircularProgress/></div> :
 				todoArray.todos?.map((item) =>
