@@ -1,5 +1,6 @@
-import { destroy, getParent, Instance, types } from "mobx-state-tree";
+import { getParent, Instance, SnapshotOut, types } from "mobx-state-tree";
 import moment from "moment";
+import { TodoArrayVm } from "./todo-array.vm";
 
 export const TodoVm = types
 	.model({
@@ -16,7 +17,7 @@ export const TodoVm = types
 			self.dateOfCompletion = newDate
 		},
 		remove() {
-			getParent<typeof TodoPageVm>(self, 2).remove(self)
+			getParent<typeof TodoArrayVm>(self, 2).remove(self)
 		},
 		changeCheckDoneStatus(status: boolean) {
 			self.done = status;
@@ -29,30 +30,12 @@ export const TodoVm = types
 	}))
 	.views(self => ({
 		get parsedDateOfCompletion() {
-			return self.dateOfCompletion ? 'Done in ' + moment(self.dateOfCompletion).format("MM/DD/YYYY") : "--"
+			return self.dateOfCompletion ? 'Done: ' + moment(self.dateOfCompletion).format("MM/DD/YYYY") : "--"
 		}
 	}))
 
 export interface ITodo extends Instance<typeof TodoVm> {
 }
 
-export const TodoPageVm = types
-	.model({
-		todos: types.optional(types.array(TodoVm), [])
-	})
-	.actions(self => ({
-		add(todo) {
-			self.todos.push(todo)
-		},
-		remove(todo) {
-			destroy(todo)
-		},
-		removeAll() {
-			destroy(self.todos)
-		}
-	}))
-	.views(self => ({
-		get allItemsRemoved() {
-			return self.todos.length === 0
-		}
-	}))
+export interface ITodoSnap extends SnapshotOut<typeof TodoVm> {
+}

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { ITodo } from '../todo.vm'
 import Paper from "@material-ui/core/Paper";
 import { useObserver } from "mobx-react-lite"
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Button from "@material-ui/core/Button";
+import { ITodo } from "../models/todo.vm";
 
 interface Props {
 	item: ITodo;

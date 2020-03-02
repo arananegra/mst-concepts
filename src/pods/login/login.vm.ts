@@ -1,7 +1,6 @@
 import { Instance, types } from "mobx-state-tree";
 import { ValidationResultVm } from "../../common/models";
-import {login, updateCredentials, onBlur} from './actions';
-import { RootLoginStore } from "./login.store";
+import { login, onBlur, updateCredentials } from './actions';
 
 export const CredentialsEntity = types
 	.model({
@@ -34,9 +33,6 @@ export const CredentialsErrors = types
 			self[fieldId] = validationResult;
 		},
 	}))
-
-export interface CredentialsErrorVm extends Instance<typeof CredentialsErrors> {
-}
 
 
 
