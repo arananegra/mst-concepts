@@ -4,10 +4,10 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import * as React from "react";
 import { useStyles } from "../login.styles";
-import { useLoginStore } from '../hooks/use-stores';
 import { TextFieldMui } from "../../../common/components/text-field-mui.component";
 import { useObserver } from "mobx-react-lite";
 import { CircularProgress } from "@material-ui/core";
+import { useLoginStore } from "../hooks/use-login.store";
 
 export const LoginComponent = () => {
 	const classes = useStyles();

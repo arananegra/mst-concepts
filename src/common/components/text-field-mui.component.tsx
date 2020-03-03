@@ -50,6 +50,7 @@ const TextFieldMuiInner: React.FC<Props> = (props) => {
 			SelectProps={SelectProps}
 			inputProps={
 				{
+					// eslint-disable-next-line
 					['data-testid']: 'mui-textfield'
 				}
 			}
