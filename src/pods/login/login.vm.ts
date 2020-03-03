@@ -1,6 +1,8 @@
 import { Instance, types } from "mobx-state-tree";
 import { ValidationResultVm } from "../../common/models";
 import { login, onBlur, updateCredentials } from './actions';
+import { history } from "../../createHistory";
+import { routerSwitchRoutes } from "../../core";
 
 export const CredentialsEntity = types
 	.model({
@@ -14,6 +16,10 @@ export const CredentialsEntity = types
 		},
 		changeLoadingStatus(isLoading: boolean) {
 			self.isLoggingLoading = isLoading;
+		},
+		logout() {
+			self.isUserLogged = false;
+			history.push(routerSwitchRoutes.login)
 		}
 	}))
 	.actions(login)
