@@ -1,0 +1,11 @@
+{
+  "rootDir": ".",
+  "preset": "ts-jest",
+  "restoreMocks": true,
+  "transformIgnorePatterns": [
+    "<rootDir>/node_modules/"
+  ],
+  "modulePaths": [
+    "<rootDir>"
+  ]
+}
